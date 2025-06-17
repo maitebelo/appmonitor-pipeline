@@ -29,7 +29,7 @@ jobs:
       - name: Job Summary
         if: always()
         run: |
-          echo "## Validação do Script" >> $GITHUB_STEP_SUMMARY
+          echo "Validação do script" >> $GITHUB_STEP_SUMMARY
           echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
           echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
@@ -46,10 +46,10 @@ jobs:
           fi
           exit 0
 
-      - name: Job Summary
+      - name: Job summary
         if: always()
         run: |
-          echo "Resultado dos Testes" >> $GITHUB_STEP_SUMMARY
+          echo "Resultado dos testes" >> $GITHUB_STEP_SUMMARY
           echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
           echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
@@ -73,7 +73,7 @@ jobs:
       - name: Job Summary
         if: always()
         run: |
-          echo "Artefatos Gerados" >> $GITHUB_STEP_SUMMARY
+          echo "Artefatos gerados" >> $GITHUB_STEP_SUMMARY
           echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
           echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
