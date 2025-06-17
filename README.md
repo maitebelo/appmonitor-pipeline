@@ -13,7 +13,6 @@ O Git é fundamental na entrega contínua pois:
 
 ## Pipeline de CI
 
-O pipeline é executado automaticamente em push na branch main ou pull requests para main
 1. **Validate**: Verifica a sintaxe do script
 2. **Test**: Executa testes automatizados
 3. **Package**: Gera e publica artefatos
@@ -37,8 +36,6 @@ O pipeline é executado automaticamente em push na branch main ou pull requests 
 
 ## Variáveis no GitHub Actions
 
-No GitHub Actions, existem três tipos principais de variáveis:
-
 - **Variáveis de Ambiente (env)**: 
   - Acessíveis durante a execução do workflow
   - Podem ser definidas no nível do workflow ou job
@@ -53,6 +50,17 @@ No GitHub Actions, existem três tipos principais de variáveis:
   - Armazenados de forma criptografada
   - Ideais para informações sensíveis
   - Exemplo: `API_KEY`
+
+### Deploy
+
+1. **Ambiente**: Production
+   - Variável: `PROD_DOMAIN=appmonitor.com`
+   - Proteção: Aprovação manual obrigatória
+
+2. **Workflow**: `.github/workflows/deploy.yml`
+   - Acionado por push na main
+   - Job bloqueado até aprovação
+   - Notificações de status via GitHub Actions
 
 ## Estrutura do Repositório
 
