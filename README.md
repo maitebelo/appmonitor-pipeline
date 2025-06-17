@@ -9,6 +9,14 @@ O Git é fundamental na entrega contínua pois:
 - Tags marcam versões estáveis do software
 - Integração com ferramentas de CI/CD
 
+## Pipeline de CI
+
+O pipeline é executado automaticamente em push na branch main ou pull requests para main
+1. **Validate**: Verifica a sintaxe do script
+2. **Test**: Executa testes automatizados
+3. **Package**: Gera e publica artefatos
+
 ## Estrutura do Repositório
 
-- `status-check.sh`: Script para verificação de status da aplicação 
+- `status-check.sh`: Script para verificação de status da aplicação
+- `.github/workflows/ci.yml`: Configuração do pipeline de CI 
