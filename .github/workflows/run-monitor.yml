@@ -1,0 +1,39 @@
+name: 1. Uso de Variáveis, Segredos e Contextos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  use-env-context:
+    name: Contexto ENV
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: dev
+      SUPPORT_EMAIL: suporte@appmonitor.io
+    steps:
+      - name: Ambiente do job
+        run: |
+          echo "Contexto 'env':"
+          echo "APP_ENV: $APP_ENV"
+          echo "SUPPORT_EMAIL: $SUPPORT_EMAIL"
+
+  use-vars-context:
+    name: Contexto VARS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configuração do repositório
+        run: |
+          echo "Contexto 'vars':"
+          echo "APP_ENV: ${{ vars.APP_ENV }}"
+          echo "SUPPORT_EMAIL: ${{ vars.SUPPORT_EMAIL }}"
+
+  use-secrets-context:
+    name: SECRETS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Secret variável de ambiente
+        env:
+          MONITOR_API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          echo "Contexto 'secrets':" 
+          echo "Chave da API: $MONITOR_API_KEY" 
