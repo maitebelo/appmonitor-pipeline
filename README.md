@@ -19,4 +19,10 @@ O pipeline é executado automaticamente em push na branch main ou pull requests 
 ## Estrutura do Repositório
 
 - `status-check.sh`: Script para verificação de status da aplicação
-- `.github/workflows/ci.yml`: Configuração do pipeline de CI 
+- `.github/workflows/ci.yml`: Configuração do pipeline de CI
+
+## Instalação
+
+```bash
+git clone https://github.com/maitebelo/appmonitor-pipeline.git
+``` 
