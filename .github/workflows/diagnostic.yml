@@ -1,0 +1,36 @@
+name: Diagnóstico
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  check-variables:
+    name: Checar Variáveis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar APP_ENV
+        run: |
+          if [ -z "${{ vars.APP_ENV }}" ]; then
+            echo "::error::APP_ENV não está definida"
+            echo "APP_ENV: Não definida" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "APP_ENV: ${{ vars.APP_ENV }}" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Verificar API_KEY
+        run: |
+          if [ -z "${{ secrets.API_KEY }}" ]; then
+            echo "::error::API_KEY não está definida"
+            echo "API_KEY: Não definida" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "API_KEY: Definida" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Job summary
+        if: always()
+        run: |
+          echo "## Como Corrigir" >> $GITHUB_STEP_SUMMARY
+          echo "1. Vá em Settings > Variables" >> $GITHUB_STEP_SUMMARY
+          echo "2. Adicione APP_ENV (ex: dev, prod)" >> $GITHUB_STEP_SUMMARY
+          echo "3. Vá em Settings > Secrets" >> $GITHUB_STEP_SUMMARY
+          echo "4. Adicione API_KEY" >> $GITHUB_STEP_SUMMARY
