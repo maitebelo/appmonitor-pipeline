@@ -6,7 +6,10 @@ on:
 jobs:
   use-env-context:
     name: Contexto ENV
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: dev
+      SUPPORT_EMAIL: suporte@appmonitor.io
     steps:
       - name: Ambiente do job
         run: |
