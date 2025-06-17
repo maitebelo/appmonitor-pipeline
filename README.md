@@ -60,7 +60,7 @@ O Git é fundamental na entrega contínua pois:
 2. **Workflow**: `.github/workflows/deploy.yml`
    - Acionado por push na main
    - Job bloqueado até aprovação
-   - Notificações de status via GitHub Actions
+   - Notificações de status
 
 ## Estrutura do Repositório
 
