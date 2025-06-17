@@ -1,5 +1,8 @@
 name: CI Pipeline
 
+env:
+  ACTIONS_STEP_DEBUG: true
+
 on:
   push:
     branches: [ main ]
@@ -17,7 +20,19 @@ jobs:
         run: echo 'echo "Teste"' > status-check.sh
 
       - name: Verificação de sintaxe do script shell
-        run: bash -n status-check.sh
+        run: |
+          bash -n status-check.sh || {
+            echo "::error::Falha na validação do script"
+            exit 1
+          }
+
+      - name: Job Summary
+        if: always()
+        run: |
+          echo "## Validação do Script" >> $GITHUB_STEP_SUMMARY
+          echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
 
   test:
     runs-on: ubuntu-latest
@@ -26,7 +41,18 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests"
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "::warning::Testes em PR podem ter comportamentos diferentes"
+          fi
           exit 0
+
+      - name: Job Summary
+        if: always()
+        run: |
+          echo "Resultado dos Testes" >> $GITHUB_STEP_SUMMARY
+          echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
 
   package:
     runs-on: ubuntu-latest
@@ -43,3 +69,12 @@ jobs:
         with:
           name: report-artifact
           path: report.zip
+
+      - name: Job Summary
+        if: always()
+        run: |
+          echo "Artefatos Gerados" >> $GITHUB_STEP_SUMMARY
+          echo "- Runner OS: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- [Artefato](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
