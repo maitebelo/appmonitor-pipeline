@@ -67,6 +67,12 @@ O Git é fundamental na entrega contínua pois:
 - `status-check.sh`: Script para verificação de status da aplicação
 - `.github/workflows/ci.yml`: Configuração do pipeline de CI
 
+### Diagnóstico Automático 
+- Verifica se as variáveis necessárias estão configuradas
+- Mostra mensagens claras de erro
+- Fornece instruções de correção
+- Pode ser executado manualmente
+
 ## Instalação
 
 ```bash
